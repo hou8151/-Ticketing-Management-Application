@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Issue } from "src/issue/entities/issue.entity"; // Adjust the import path based on your actual structure
-import { Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Entity } from "typeorm";
 
-
+@Entity({ name: 'Attachment' })
 export class Attachment {
     @PrimaryGeneratedColumn({ type: "integer", name: "AttachmentID" })
     AttachmentID: number;
@@ -11,7 +11,7 @@ export class Attachment {
     @Column({ type: "integer", name: "IssueID" })
     IssueID: number;
 
-    @ManyToOne(() => Issue, issue => issue.attachments) // Establishing Many-to-One relationship with Issue
+   @ManyToOne(() => Issue, issue => issue.attachments) // Establishing Many-to-One relationship with Issue
     @JoinColumn({ name: "IssueID" }) // Specify the foreign key column
     issue: Issue;
 

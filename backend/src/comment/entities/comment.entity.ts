@@ -1,20 +1,14 @@
+
 import { ApiProperty } from "@nestjs/swagger";
 import { Issue } from "src/issue/entities/issue.entity";
+
 import { User } from "src/user/entities/user.entity";
 
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-
+import { Column, PrimaryGeneratedColumn, ManyToOne, Entity } from "typeorm";
+@Entity({ name: 'Comment' })
 export class Comment {
     @PrimaryGeneratedColumn({ type: "integer", name: "CommentID" })
     CommentID: number;
-
-    @ApiProperty()
-    @ManyToOne(() => Issue, issue => issue.comments)
-    issue: Issue;
-
-    @ApiProperty()
-    @ManyToOne(() => User, user => user.comments)
-    author: User;
 
     @ApiProperty()
     @Column("text", { name: "Priority", nullable: true })
@@ -43,4 +37,8 @@ export class Comment {
     @ApiProperty()
     @Column("integer", { name: "updatedby", nullable: true })
     updatedBy: number | null;
+
+     //@ApiProperty()
+    // @ManyToOne(() => User, user => user.comments)
+    //   author: User;
 }

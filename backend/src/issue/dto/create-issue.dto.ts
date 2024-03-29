@@ -5,7 +5,7 @@ export class CreateIssueDto {
     IssueID: number;
 
     @ApiProperty()
-    Title  : string ;
+    Title: string ;
 
     @ApiProperty()
     Description?: string;

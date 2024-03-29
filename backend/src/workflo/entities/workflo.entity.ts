@@ -1,16 +1,18 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Column, PrimaryGeneratedColumn } from "typeorm";
 
+import { ApiProperty } from "@nestjs/swagger";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity({ name: 'Workflow' })
 export class Workflow {
     @PrimaryGeneratedColumn({ type: "integer", name: "WorkflowID" })
     WorkflowID: number;
 
     @ApiProperty()
-    @Column({ type: "string", name: "Name" })
+    @Column({ type: "varchar", name: "Name" })
     Name: string;
 
     @ApiProperty()
-    @Column({ type: "string", name: "Steps" })
+    @Column({ type: "varchar", name: "Steps" })
     Steps: string;
 
     @ApiProperty()

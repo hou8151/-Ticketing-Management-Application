@@ -1,10 +1,15 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Issue } from "src/issue/entities/issue.entity"; // Adjust the import path based on your actual structure
-import { Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { CreateUserDto } from "../dto/create-user.dto";
+
+ // Adjust the import path based on your actual structure
+ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+
+ import { ApiProperty } from '@nestjs/swagger';
+import { Issue } from 'src/issue/entities/issue.entity';
+
+@Entity({ name: 'User' })
 
 
 export class User {
+ 
     
     @PrimaryGeneratedColumn({ type: "integer", name: "UserID" })
     UserID: number;
@@ -44,11 +49,14 @@ export class User {
     @ApiProperty()
     @Column("integer", { name: "updatedby", nullable: true })
     updatedBy: number | null;
-
-    @OneToMany(() => Issue, issue => issue.reporter)
+   
+   
+   @OneToMany(() => Issue, issue => issue.reporter)
     reportedIssues: Issue[];
 
-    @OneToMany(() => Issue, issue => issue.assignee)
-    assignedIssues: Issue[];
-    comments: any;
+   @OneToMany(() => Issue, issue => issue.assignee)
+   assignedIssues: Issue[];
+  
+ 
+   
 }

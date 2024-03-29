@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AttchmentModule } from './attchment/attchment.module';
 import { ProjectModule } from './project/project.module';
 import { User } from './user/entities/user.entity';
+import { IssueModule } from './issue/issue.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { User } from './user/entities/user.entity';
         port: 5432,
         username:'postgres',
         password: 'postgres',
-        database: 'api',
+        database: 'postgres',
+        entities: [],
         autoLoadEntities: true,
         synchronize: true,
       }),
@@ -28,7 +30,8 @@ import { User } from './user/entities/user.entity';
   WorkfloModule,
   UserModule,
   AttchmentModule,
-  ProjectModule
+  ProjectModule,
+  IssueModule
   ],
   controllers: [AppController, ],
   providers: [AppService],

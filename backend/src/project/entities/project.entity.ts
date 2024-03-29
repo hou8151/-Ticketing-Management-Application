@@ -1,8 +1,9 @@
+
 import { ApiProperty } from "@nestjs/swagger";
 import { Issue } from "src/issue/entities/issue.entity";
-import { Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Column, PrimaryGeneratedColumn, OneToMany, Entity } from "typeorm";
  // Adjust the import path based on your actual structure
-
+ @Entity({ name: 'Project' })
 export class Project {
     @PrimaryGeneratedColumn({ type: "integer", name: "ProjectID" })
     ProjectID: number;
@@ -46,7 +47,7 @@ export class Project {
     @ApiProperty()
     @Column("integer", { name: "updatedby", nullable: true })
     updatedBy: number | null;
-
+   
     @OneToMany(() => Issue, issue => issue.project)
     issues: Issue[];
 }
