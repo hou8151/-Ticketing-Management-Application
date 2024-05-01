@@ -9,6 +9,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly UserRepository: Repository<User>,
+    
   ) { }
 
  async create(userBody: any) {
@@ -48,15 +49,15 @@ async findOne(id: any): Promise<User> {
   //  }
   //  return null;
  // }
- async update(id: any, updateUserDto: any) {
+ async update(UserID: any, updateUserDto: any) {
   const findOptions: FindOneOptions = {
-    where: { id: id },
+    where: { id: UserID },
   };
 
   const user = await this.UserRepository.findOne(findOptions);
 
   if (!user) {
-    throw new NotFoundException(`User #${id} not found`);
+    throw new NotFoundException(`User #${UserID} not found`);
   }
 
   Object.assign(user, updateUserDto);
@@ -76,4 +77,20 @@ async findOne(id: any): Promise<User> {
   async remove(id: number) {
     await this.UserRepository.update(id,{isDeleted : true});
   }
+  async findByUsername(Username: string): Promise<User | undefined> {
+    return this.UserRepository.findOne({ where: { Username } });
+  }
+
+  async createUser(username: any, email: any, password: any): Promise<User> {
+    const user = new User();
+    user.Username = username;
+    user.Email = email;
+    user.Password = password; // Remember to hash the password before saving in production
+    return this.UserRepository.save(user);
+  }
+
+  async getUserById(UserID: any): Promise<User | undefined> {
+    return this.UserRepository.findOne(UserID);
+  }
+  
 }
