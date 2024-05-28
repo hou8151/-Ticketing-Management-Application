@@ -1,32 +1,32 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Issue } from "src/issue/entities/issue.entity";
 
 export class CreateAttchmentDto {
   
-   @ApiProperty()
-   AttachmentID?: number;
+    @ApiProperty()
+    AttachmentID: number;
 
-   @ApiProperty()
-   IssueID?: number;
+    @ApiProperty()
+    issue: Issue;
 
-   @ApiProperty()
-   FileName?: string;
-   
-   @ApiProperty()
-    FilePath?: string;
- 
-    
     @ApiProperty()
-    isDeleted?: number;
- 
+    FileName: string | null;
+
     @ApiProperty()
-    createdAt?: Date;
- 
+    FilePath?: string | null;
+
     @ApiProperty()
-    createdBy?: number;
- 
+    isDeleted: boolean | null;
+
     @ApiProperty()
-    updatedAt?: Date;
- 
+    createdAt: Date | null;
+
     @ApiProperty()
-    updatedBy?: number;
+    createdBy: number | null;
+
+    @ApiProperty()
+    updatedAt: Date | null;
+
+    @ApiProperty()
+    updatedBy: number | null;
 }

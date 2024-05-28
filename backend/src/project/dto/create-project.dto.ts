@@ -1,33 +1,40 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Issue } from "src/issue/entities/issue.entity";
 
 export class CreateProjectDto {
     @ApiProperty()
-    ProjectID ?: number;
-  
+    ProjectID: number;
+
     @ApiProperty()
-    ProjectName?: string;
-  
+    ProjectName: string | null;
+
     @ApiProperty()
-    Description?: string;
-    
+    Description: string | null;
+
     @ApiProperty()
-    StartDate ?: number;
-    
+    Email: string | null;
+
     @ApiProperty()
-    EndDate ?: number;
-     
-     @ApiProperty()
-     isDeleted?: number;
-  
-     @ApiProperty()
-     createdAt?: number;
-  
-     @ApiProperty()
-     createdBy?: number;
-  
-     @ApiProperty()
-     updatedAt?: number;
-  
-     @ApiProperty()
-     updatedBy?: number;
+    StartDate: Date | null;
+
+    @ApiProperty()
+    EndDate: Date | null;
+
+    @ApiProperty()
+    isDeleted: boolean | null;
+
+    @ApiProperty()
+    createdAt: Date | null;
+
+    @ApiProperty()
+    createdBy: number | null;
+
+    @ApiProperty()
+    updatedAt: Date | null;
+
+    @ApiProperty()
+    updatedBy: number | null;
+
+    @ApiProperty()
+    issues: Issue[];
 }

@@ -78,14 +78,14 @@ async findOne(id: any): Promise<User> {
     await this.UserRepository.update(id,{isDeleted : true});
   }
   async findByUsername(Username: string): Promise<User | undefined> {
-    return this.UserRepository.findOne({ where: { Username } });
+    return this.UserRepository.findOne({ where: {  } });
   }
 
   async createUser(username: any, email: any, password: any): Promise<User> {
     const user = new User();
-    user.Username = username;
-    user.Email = email;
-    user.Password = password; // Remember to hash the password before saving in production
+    user.username = username;
+    user.email = email;
+    user.password = password; // Remember to hash the password before saving in production
     return this.UserRepository.save(user);
   }
 

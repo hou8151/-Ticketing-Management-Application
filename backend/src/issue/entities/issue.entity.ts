@@ -1,78 +1,90 @@
 
 import { ApiProperty } from "@nestjs/swagger";
 import { Attachment } from "src/attchment/entities/attchment.entity";
+import { Comment } from "src/comment/entities/comment.entity";
 
 import { Project } from "src/project/entities/project.entity";
 import { User } from "src/user/entities/user.entity";
-import { Column, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable, OneToMany, Entity } from "typeorm";
+import { Column, PrimaryGeneratedColumn, ManyToOne, JoinTable, OneToMany, Entity, OneToOne, JoinColumn, ManyToMany } from "typeorm";
 
 @Entity({ name: 'Issue' })
 export class Issue {
   
-    @PrimaryGeneratedColumn({ type: "integer", name: "IssueID " })
-    IssueID: number;
-
-    @ApiProperty()
-    @Column({ type: "varchar", name: "Title" })
-    Title: string;
-
-    @ApiProperty()
-    @Column("text", { name: "Description", nullable: true })
-    Description: string | null;
+  @PrimaryGeneratedColumn({ type: "integer", name: "IssueID" })
+  issueId: number;
 
  
-    @ApiProperty()
-    @Column("text", { name: "Status", nullable: true })
-    Status: string;
+  @Column({ type: "varchar", name: "Title",nullable: true })
+  title: string| null;
 
-    @ApiProperty()
-    @Column("timestamp with time zone", { name: "DueDate", nullable: true })
-    DueDate: Date | null;
+  
+  @Column("text", { name: "Description", nullable: true })
+  description: string | null;
 
-    @ApiProperty()
-    @Column("boolean", { name: "isdeleted", nullable: true, default: false })
-    isDeleted: boolean | null;
+  
+  @Column("text", { name: "Status", nullable: true })
+  status: string;
 
-    @ApiProperty()
-    @Column("timestamp with time zone", { name: "createdat", nullable: true })
-    createdAt: Date | null;
+ 
+  @Column("timestamp with time zone", { name: "DueDate", nullable: true })
+  dueDate: Date | null;
 
-    @ApiProperty()
-    @Column("integer", { name: "createdby", nullable: true })
-    createdBy: number | null;
+  
+  @Column("boolean", { name: "isdeleted", nullable: true, default: false })
+  isDeleted: boolean | null;
 
-    @ApiProperty()
-    @Column("timestamp with time zone", { name: "updatedat", nullable: true })
-    updatedAt: Date | null;
+  
+  @Column("timestamp with time zone", { name: "createdat", nullable: true })
+  createdAt: Date | null;
 
-    @ApiProperty()
-    @Column("integer", { name: "updatedby", nullable: true })
-    updatedBy: number | null;
+  
+  @Column("integer", { name: "createdby", nullable: true })
+  createdBy: number | null;
 
+  @Column("timestamp with time zone", { name: "updatedat", nullable: true })
+  updatedAt: Date | null;
 
-    //@ManyToMany(() => Comment)
-   // @JoinTable()
-    //comments: Comment[];
+  
+  @Column("integer", { name: "updatedby", nullable: true })
+  updatedBy: number | null;
 
-    @OneToMany(() => Attachment, attchment => attchment.IssueID)
-    attachments: Attachment[];
-
-    @ApiProperty()
-    @ManyToOne(() => User, user => user.reportedIssues)
-    reporter: User;
-
-   @ApiProperty()
-    @ManyToOne(() => User, user => user.assignedIssues)
-    assignee: User;
-
-   @ApiProperty()
-    @ManyToOne(() => Project, project => project.issues)
-    project: Project;
-
-   @ApiProperty()
   @Column("text", { name: "Priority", nullable: true })
-    Priority: string;
-  // @ApiProperty()
-  //  @ManyToOne(() => Issue, issue => issue.comments)
-   // issues: Issue;
+ priority: string;
+  
+ 
+  @ManyToOne(() => User, user => user.reportedIssues)
+  reporter: User;
+ 
+ // @ManyToOne(() => User, user => user.reportedIssues)
+ //reporterId: User;
+
+ @ManyToOne(() => User, user => user.assignedIssues)
+ assignee: User;
+ // @ApiProperty()
+ // @ManyToOne(() => User, user => user.assignedIssues)
+ // assigneeId: User;
+ @ManyToOne(() => Project, project => project.issues)
+ project: Project;
+
+ // @ApiProperty()
+//  @ManyToOne(() => Project, project => project.issues)
+//  projectId: Project;
+ @ManyToMany(() => Comment)
+ @JoinTable()
+ comments: Comment[];
+
+  
+  
+
+@OneToMany(() => Attachment, attachment => attachment.issue) // Define the relationship with attachments
+attachments: Attachment[]; // Collection of attachments associated with the issue
+
+    //@OneToMany(() => Attachment, attachment => attachment.issue)
+ // attachments: Attachment[];
+
+//  @ApiProperty()
+ // @OneToMany(() => Comment, comment => comment.issueId)
+ // @JoinColumn({ name: 'issueId' }) // Specify the name of the foreign key column
+//  comments: Comment[];
+  
 }

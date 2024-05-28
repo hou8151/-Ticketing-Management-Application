@@ -1,18 +1,18 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateCommentDto } from './create-comment.dto';
+import { Issue } from 'src/issue/entities/issue.entity';
+import { User } from "src/entity/User";
 
 export class UpdateCommentDto extends PartialType(CreateCommentDto) {
     @ApiProperty()
     CommentID: number;
 
     @ApiProperty()
-    IssueID: number;
+    issue: Issue;
 
     @ApiProperty()
-    Author: number;
+    author: User;
 
-   
-     
      @ApiProperty()
      Text: string;
   

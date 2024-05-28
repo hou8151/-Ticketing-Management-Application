@@ -12,7 +12,7 @@ export class IssueController {
     return this.issueService.create(createIssueDto);
   }
 
-  @Get()
+  @Get('/allissues')
   findAll() {
     return this.issueService.findAll();
   }
